@@ -1,0 +1,27 @@
+# ───────────────────────────────────────────────
+# ASTROYA — Configuration Render (Blueprint)
+# Déploiement automatique du microservice thème astral
+# ───────────────────────────────────────────────
+services:
+  - type: web
+    name: astroya-theme-astral
+    runtime: python
+    plan: free
+    region: frankfurt          # région UE (cohérent avec Supabase UE)
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn --chdir app main:app --bind 0.0.0.0:$PORT --timeout 120 --workers 1"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.4"
+      - key: ASTROYA_API_KEY
+        sync: false            # à saisir dans le dashboard Render (secret)
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: SUPABASE_BUCKET
+        value: themes-astraux
+      - key: SUPABASE_TABLE
+        value: themes_astraux
+      - key: ALLOWED_ORIGIN
+        value: https://www.astroya.fr
