@@ -2,4 +2,3 @@ Flask==3.0.3
 gunicorn==23.0.0
 weasyprint==69.0
 requests==2.32.3
-fonttools==4.54.1
